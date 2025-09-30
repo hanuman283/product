@@ -1,36 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../interface/Iproducts';
-import { ProductService } from '../../service/product.service';
-import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-
+import { Product } from '../../interface/Iproducts';
+import { CommonModule } from '@angular/common';
 @Component({
   standalone:true,
   selector: 'app-product',
-  imports: [TableModule,FormsModule,ButtonModule],
+  imports: [CommonModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnInit {
-products: Product[] = [];
-  productDialog: boolean = false;
-  product: Product = { id: 0, name: '', description: '', price: 0 };
-  isEditMode = false;
-  submitted = false;
-
-  constructor(
-    private productService: ProductService,
-  ) {}
-
+  PRODUCTS:Product []=[];
   ngOnInit(): void {
-    this.loadProducts();
-  }
+   this.PRODUCTS = [
+    {
+      id: 1,
+      name: 'Apple iPhone 14',
+      description: '128GB, Midnight Black',
+      price: 799.99
+    },
+    {
+      id: 2,
+      name: 'Samsung Galaxy S23',
+      description: '256GB, Phantom Gray',
+      price: 899.99
+    },
+    {
+      id: 3,
+      name: 'Sony WH-1000XM5',
+      description: 'Noise-Canceling Headphones',
+      price: 349.99
+    }
+  ];
 
-  loadProducts() {
-    this.productService.getAll().subscribe({
-      next: (data) => this.products = data,
-      error: (err) => console.error('Error loading products', err)
-    });
   }
 }
