@@ -16,19 +16,19 @@ export class ProductComponent implements OnInit {
     {
       id: 1,
       name: 'Apple iPhone 14',
-      description: '128GB, Midnight Black',
+      description: 'Sagar More Patil',
       price: 799.99
     },
     {
       id: 2,
       name: 'Samsung Galaxy S23',
-      description: '256GB, Phantom Gray',
+      description: 'Pratik Rathod',
       price: 899.99
     },
     {
       id: 3,
       name: 'Sony WH-1000XM5',
-      description: 'Noise-Canceling Headphones',
+      description: 'Om Bhau',
       price: 349.99
     }
   ];
