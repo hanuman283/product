@@ -1,10 +1,74 @@
-<div class="product-list">
-  <h2>Product List</h2>
-  <ul>
-    <li *ngFor="let product of PRODUCTS">
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.description }}</p>
-      <strong>Price: ${{ product.price }}</strong>
-    </li>
-  </ul>
+<div class="container">
+  <h2>{{ isEditing ? 'Edit Product' : 'Add New Product' }}</h2>
+  
+  <!-- Product Form -->
+  <form (ngSubmit)="onSubmit()" #productForm="ngForm" class="product-form">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input 
+        type="text" 
+        id="name" 
+        name="name" 
+        [ngModel]="isEditing ? selectedProduct?.name : newProduct.name"
+        (ngModelChange)="isEditing ? (selectedProduct!.name = $event) : (newProduct.name = $event)"
+        required 
+        class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea 
+        id="description" 
+        name="description" 
+        [ngModel]="isEditing ? selectedProduct?.description : newProduct.description"
+        (ngModelChange)="isEditing ? (selectedProduct!.description = $event) : (newProduct.description = $event)"
+        required 
+        class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input 
+        type="number" 
+        id="price" 
+        name="price" 
+        [ngModel]="isEditing ? selectedProduct?.price : newProduct.price"
+        (ngModelChange)="isEditing ? (selectedProduct!.price = $event) : (newProduct.price = $event)"
+        required 
+        class="form-control">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">{{ isEditing ? 'Update' : 'Add' }} Product</button>
+      <button type="button" class="btn btn-secondary" *ngIf="isEditing" (click)="resetForm()">Cancel</button>
+    </div>
+  </form>
+
+  <!-- Products Table -->
+  <div class="products-table">
+    <h3>Products List</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price | currency }}</td>
+          <td>
+            <button class="btn btn-edit" (click)="editProduct(product)">Edit</button>
+            <button class="btn btn-delete" (click)="deleteProduct(product.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

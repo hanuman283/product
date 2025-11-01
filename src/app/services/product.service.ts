@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
-  private apiUrl: string = 'https://localhost:7080/api/Products';
+  private apiUrl: string = 'https://mywebappproduct-947519587732.us-central1.run.app/api/Products';
 
   constructor(private http: HttpClient) {}
 
